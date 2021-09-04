@@ -8,17 +8,17 @@ const KAFKA_SCRAM_MECHANISMS = [
 
 class Kafka {
 	constructor({
+		brokers = ((process && process.env && process.env.MILL_KAFKAJS_BROKERS) || '').split(','),
 		id = process && process.env && process.env.MILL_KAFKAJS_ID,
 		mechanism = process && process.env && process.env.MILL_KAFKAJS_MECHANISM,
 		password = process && process.env && process.env.MILL_KAFKAJS_PASSWORD,
-		urls = process && process.env && process.env.MILL_KAFKAJS_URLS,
 		username = process && process.env && process.env.MILL_KAFKAJS_USERNAME,
 	}) {
 		// * Inputs
+		this.brokers = brokers
 		this.id = id
 		this.mechanism = mechanism
 		this.password = password
-		this.urls = urls
 		this.username = username
 
 		// * Connections
@@ -49,7 +49,7 @@ class Kafka {
 		if (typeof this.kafka === 'undefined') {
 			this.kafka = new KafkaJs({
 				...this._buildAuthentication(),
-				brokers: this.urls,
+				brokers: this.brokers,
 				clientId: this.id,
 			})
 		}
