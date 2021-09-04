@@ -21,7 +21,8 @@
     "url": "git+https://github.com/1mill/kafka.git"
   },
   "keywords": [
-    "lambda"
+    "cloudevent",
+    "kafka"
   ],
   "authors": [
     "Erik Ekberg <nightw0lf@hotmail.com>"
