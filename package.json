@@ -33,5 +33,8 @@
   "homepage": "https://github.com/1mill/kafka#readme",
   "devDependencies": {
     "microbundle": "^0.13.3"
+  },
+  "dependencies": {
+    "kafkajs": "^1.15.0"
   }
 }
