@@ -6,16 +6,20 @@ const KAFKA_SCRAM_MECHANISMS = [
 	'scram-sha-512',
 ]
 
+const fetchEnv = (name) => {
+	return process && process.env && process.env[name]
+}
+
 class Kafka {
 	constructor({
-		brokers = ((process && process.env && process.env.MILL_KAFKAJS_BROKERS) || '').split(','),
-		id = process && process.env && process.env.MILL_KAFKAJS_ID,
-		mechanism = process && process.env && process.env.MILL_KAFKAJS_MECHANISM,
-		password = process && process.env && process.env.MILL_KAFKAJS_PASSWORD,
-		username = process && process.env && process.env.MILL_KAFKAJS_USERNAME,
+		brokers = fetchEnv('1MILL_KAFKA_KAFKAJS_BROKERS'),
+		id = fetchEnv('1MILL_KAFKA_KAFKAJS_ID'),
+		mechanism = fetchEnv('1MILL_KAFKA_KAFKAJS_MECHANISM'),
+		password = fetchEnv('1MILL_KAFKA_KAFKAJS_PASSWORD'),
+		username = fetchEnv('1MILL_KAFKA_KAFKAJS_USERNAME'),
 	}) {
 		// * Inputs
-		this.brokers = brokers
+		this.brokers = typeof brokers === 'string' ? brokers.split(',') : (brokers || [])
 		this.id = id
 		this.mechanism = mechanism
 		this.password = password
